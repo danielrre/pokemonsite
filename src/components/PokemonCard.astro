@@ -7,7 +7,7 @@ interface Props {
 
 const { name, url, isBig=false } = Astro.props; //  Aqui estamos desestructurando las propiedades que se pasan al componente PokemonCard. name y url son obligatorias, mientras que isBig es opcional y tiene un valor predeterminado de false.
 
-const id = url.split('/').at(-2);
+const id = url.split('/').at(-2); // Aqui estamos obteniendo el id del pokemon a partir de la url que se pasa como propiedad. La url tiene la forma "https://pokeapi.co/api/v2/pokemon/{id}/", por lo que al hacer split('/') obtenemos un array con los elementos de la url, y al usar at(-2) obtenemos el penúltimo elemento del array, que es el id del pokemon.
 const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
 
 ---
