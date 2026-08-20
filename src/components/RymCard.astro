@@ -1,0 +1,16 @@
+---
+interface Props {
+    name: string;
+    imageSrc: string;    
+}
+
+const { name, imageSrc } = Astro.props;
+
+---
+
+<a class="bg-slate-700 rounded-lg p-4 m-2 max-w-xs flex flex-col items-center hover:scale-105 transition-transform duration-300" href={`/rickandmorty/${name}`}>
+    <h2 class="text-2xl capitalize">{name}</h2>
+    <img src={imageSrc} alt={name} />
+</a>
+
+

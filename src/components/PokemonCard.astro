@@ -1,0 +1,32 @@
+---
+interface Props {
+    name: string;
+    url: string;     
+    isBig?: boolean;
+}
+
+const { name, url, isBig=false } = Astro.props; //  Aqui estamos desestructurando las propiedades que se pasan al componente PokemonCard. name y url son obligatorias, mientras que isBig es opcional y tiene un valor predeterminado de false.
+
+const id = url.split('/').at(-2);
+const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`;
+
+---
+<a 
+    href={`/pokemon/${name}`} 
+    class:list={[
+        'bg-slate-700 rounded-lg p-2 m-2 max-w-xs flex flex-col items-center hover:scale-105 transition-transform duration-300',
+         isBig && 'bg-slate-800 max-w-lg flex flex-col'
+    ]} >
+    <h2 class:list={[ 'capitalize',
+        isBig && 'text-3xl', // aqui decimos si la variable isBig es verdadera, entonces se aplica la clase text-3xl, de lo contrario no se aplica ninguna clase adicional.
+        !isBig && 'text-xl' // si isBig es falso, entonces se aplica la clase text-xl
+    ]}>#{id} {name}</h2>
+    <img 
+    class:list={[
+        isBig && 'bg-slate-800 max-w-lg flex flex-col', // si isBig es verdadero, entonces se aplican las clases bg-slate-800, max-w-lg y flex flex-col
+        !isBig && 'w-32 h-32' // si isBig es falso, entonces se aplican las clases w-32 y h-32
+    ]}
+    transition:name={`${name}-image`} 
+    src={imageSrc} 
+    alt={name} />
+</a>

@@ -1,0 +1,35 @@
+---
+import type { GetStaticPaths } from "astro";
+import MainLayout from '../../layouts/MainLayout.astro';
+import RymCard from '../../components/RymCard.astro';
+
+export const getStaticPaths = ( async() => {
+
+    const resp = await fetch("https://rickandmortyapi.com/api/character");
+    const { results } =  await resp.json() as { results: { name: string, image: string }[] };
+    
+    return results.map(( {name, image} ) => ({
+        params: { name: name },
+        props: { imageSrc: image }
+    }));
+}) satisfies GetStaticPaths;
+
+const { name }   = Astro.params;
+const { imageSrc } = Astro.props;
+
+---
+
+<MainLayout title={`${name}`}>
+    <div class="mx-auto max-w-xs mt-8">
+        <RymCard name={name} imageSrc={imageSrc} />
+    </div>
+    <a href="/rickandmorty" class="text-2xl text-center block mt-4">Back to Rick and Morty List</a>
+</MainLayout>
+
+<style>
+    @reference "tailwindcss";
+    a {
+        @apply hover:underline text-blue-500;
+    } 
+    
+</style>

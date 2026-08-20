@@ -1,17 +1,16 @@
 ---
+import MainLayout from '../layouts/MainLayout.astro';
+
+const title = 'My characters Site';
 
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<MainLayout title={title}>
+
+<ul class="flex flex-col text-center gap-4 mt-4">  
+  <a href="/pokemon" class="text-3xl"> Pokemon </a>
+  <a href="/rickandmorty" class="text-3xl"> Rick and Morty</a>
+</ul>
+
+</MainLayout>
+
